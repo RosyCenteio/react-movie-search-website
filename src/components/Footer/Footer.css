@@ -1,0 +1,30 @@
+
+.footer__logo--img{
+  width: 80px;
+}
+
+.footer__row{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  position: relative;
+  z-index: 1; /* stays above particles */
+}
+.footer__link{
+  font-weight: bold;
+  font-size: 24px;
+  padding: 8px;
+}
+
+.footer__link,
+.footer__copyright {
+  color: #242424;
+  margin-top: 24px;
+
+}
+
+.footer__list {
+  margin-bottom: 16px;
+}
