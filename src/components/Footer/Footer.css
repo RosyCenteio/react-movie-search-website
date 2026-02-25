@@ -1,4 +1,6 @@
-
+.container{
+  background-color: #242424;
+}
 .footer__logo--img{
   width: 80px;
 }
@@ -8,7 +10,6 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
   position: relative;
   z-index: 1; /* stays above particles */
 }
@@ -20,7 +21,7 @@
 
 .footer__link,
 .footer__copyright {
-  color: #242424;
+  color: white;
   margin-top: 24px;
 
 }

@@ -3,6 +3,7 @@ import "./MoviesList.css"
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Movie from '../Ui/Movie';
+import spinner from '../../assets/spinner.gif'
 
 const MoviesList = () => {
 
@@ -53,9 +54,7 @@ const MoviesList = () => {
     }
 
     useEffect(() => {
-
-        searchMovies(defaultTitle);
-
+      searchMovies(defaultTitle, "");
     },[])
 
 
@@ -81,29 +80,45 @@ const MoviesList = () => {
 
           <div className="movies">
             {
-                movies.Search.map((movie, index) => {
-                    return (
-                      <>
-                      { loading ? 
-                        (
+                  movies !== undefined && movies.Search !== undefined && movies.Search.length > 0 ? (
+                    movies.Search.map((movie, index) => {
+                        return (
                           <>
-                            <div className="movie" key={index}>
-                              <div className="movie__img--skeleton"></div>
-                              <div className="skeleton movie__title--skeleton"></div>
-                              <div className="skeleton movie__sub-title--skeleton"></div>
-                            </div>
-                          </>
-                        )   
-                        :
-                        (
-                          <Movie movie={movie} id={index}/>
-                        )
-                      }
+                          { loading ? 
+                            (
+                              <>
+                                <div className="movie" key={index}>
+                                  <div className="movie__img--skeleton"></div>
+                                  <div className="skeleton movie__title--skeleton"></div>
+                                  <div className="skeleton movie__sub-title--skeleton"></div>
+                                </div>
+                              </>
+                            )   
+                            :
+                            (
+                              <Movie movie={movie} id={index} className={"movie"}/>
+                            )
+                          }
 
-                      </>
-                    )
-                })
-            }
+                          </>
+                        )
+                     })
+                  ) : 
+                  (
+                    <div>
+                      {loading ? 
+                      (
+                        <div className='loading__spinner'><img src={spinner} alt="" /></div>
+                      ): (
+                        <div className='not__found--results'> No results Found</div>
+                      )
+                      }
+                      
+                    </div>
+                                       
+                  )
+                }
+            
             
           </div>
         </div>

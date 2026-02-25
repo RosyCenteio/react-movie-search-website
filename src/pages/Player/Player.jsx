@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import './Player.css'
 import { Link } from 'react-router-dom'
+import Nav from '../../components/Nav/Nav'
+import Footer from '../../components/Footer/Footer'
 
 
 const Player = () => {
@@ -26,6 +28,7 @@ const Player = () => {
 
   return (
     <>
+        <Nav />
         { loading ? 
           (
               <div className="movie">
@@ -41,7 +44,7 @@ const Player = () => {
                  <button className='btn__back'>← Back</button>
               </Link> 
               <div className='movie_info'>
-                <Movie movie={movie}/>
+                <Movie movie={movie} className={"movie__detail"}/>
                 <div className='movie__info--description'>
                   <p><span className='bold'>Genre:</span> {movie.Genre}</p>
                   <p><span className='bold'>Language:</span>  {movie.Language}</p>
@@ -52,7 +55,9 @@ const Player = () => {
             
           )
         }
+        <Footer />
     </>
+
   )
 }
 

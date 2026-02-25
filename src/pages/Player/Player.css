@@ -1,10 +1,12 @@
+
 .movie_info{
     display: flex;
-    align-items: start;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin: 80px 60px;
     position: relative;
     z-index: 1;
-    
 }
 
 .movie__info--description{
@@ -13,18 +15,42 @@
     margin-top: 20px;
     line-height: 2.5;
     font-size: 16px;
+    color: white;
 }
 
 .bold{
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .btn__back{
   padding: 0 20px;
   position: absolute;
-  margin-left: 88px;
-  top: 64px;
+  margin-left: 20%;
   cursor: pointer;
-  
 }
+
+
+
+/* SMALL PHONES, TABLETS, LARGE SMARTPHONES */
+@media (max-width: 768px) {
+  .movie_info{
+    max-width: 640px;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* SMALL PHONES, LARGE SMARTPHONES */
+@media (max-width: 480px) {
+
+  .movie_info{
+    max-width: 320px;
+    align-items: center;
+    justify-content: center;
+  }
+  .movie__info--description {
+    font-size: 12px;
+  }
+}
+
