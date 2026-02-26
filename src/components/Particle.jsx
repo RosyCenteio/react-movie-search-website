@@ -28,7 +28,7 @@ function ParticlesBackground() {
       zIndex: -1,            
     }}
     options={{
-      background: { color: { value: "#1a1a1a" } },
+      background: { color: { value: "#000000" } },
       fpsLimit: 60,
       particles: {
         color: { value: "#deca16" },

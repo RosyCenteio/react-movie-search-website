@@ -6,11 +6,12 @@ import './Player.css'
 import { Link } from 'react-router-dom'
 import Nav from '../../components/Nav/Nav'
 import Footer from '../../components/Footer/Footer'
+import spinner from '../../assets/spinner.gif'
 
 
 const Player = () => {
   const { id } = useParams(); 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState({});
 
   async function fetchMovies(){
@@ -31,10 +32,8 @@ const Player = () => {
         <Nav />
         { loading ? 
           (
-              <div className="movie">
-                <div className="movie__img--skeleton"></div>
-                <div className="skeleton movie__title--skeleton"></div>
-                <div className="skeleton movie__sub-title--skeleton"></div>
+              <div className='loading-spinner'>
+                <img src={spinner} alt="" />
               </div>
           )   
           :

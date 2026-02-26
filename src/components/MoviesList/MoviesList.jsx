@@ -9,7 +9,7 @@ const MoviesList = () => {
 
     let defaultTitle = "God";
     const [searchField, setSearchField] = useState("");
-    const[loading, setLoading] = useState(false);
+    const[loading, setLoading] = useState(true);
     const[movies, setMovies] = useState({Search: []});
 
     function onKeyPress(key){
@@ -54,8 +54,19 @@ const MoviesList = () => {
     }
 
     useEffect(() => {
-      searchMovies(defaultTitle, "");
+        searchMovies(defaultTitle, "");
     },[])
+
+
+    function filterMovies (filter){
+        if(filter === 'NEW_TO_OLD'){
+            setMovies({Search: movies.Search.sort((a,b) => b.Year- a.Year)});
+        }
+         else if(filter === 'OLD_TO_NEW'){
+            setMovies({Search: movies.Search.sort((a,b) => a.Year- b.Year)});
+        }
+        console.log(movies.Search);
+    }
 
 
 
@@ -75,47 +86,47 @@ const MoviesList = () => {
 
           <div className="category__search">
             <button className="category__search--title" onClick={() => {searchMovies(searchField,"movie")}}>Movies</button>
-            <button className="category__search--title"onClick={() => {searchMovies(searchField,"series")}}>Series</button>  
-          </div>
-
+            <button className="category__search--title"onClick={() => {searchMovies(searchField,"series")}}>Series</button> 
+            <select id='filter' defaultValue="DEFAULT" onChange={(event) => filterMovies (event.target.value)}>
+                <option value="DEFAULT" disabled>Sort</option>
+                <option value="NEW_TO_OLD">Newest to Oldest</option>
+                <option value="OLD_TO_NEW">Oldest to Newest</option>
+            </select>
+          </div> 
           <div className="movies">
-            {
+              {
                   movies !== undefined && movies.Search !== undefined && movies.Search.length > 0 ? (
                     movies.Search.map((movie, index) => {
                         return (
-                          <>
-                          { loading ? 
-                            (
-                              <>
-                                <div className="movie" key={index}>
-                                  <div className="movie__img--skeleton"></div>
-                                  <div className="skeleton movie__title--skeleton"></div>
-                                  <div className="skeleton movie__sub-title--skeleton"></div>
-                                </div>
-                              </>
-                            )   
-                            :
-                            (
-                              <Movie movie={movie} id={index} className={"movie"}/>
-                            )
-                          }
-
-                          </>
+                          <React.Fragment key={index}>
+                            { loading ? 
+                              (
+                                <>
+                                  <div className="movie">
+                                    <div className="movie__img--skeleton"></div>
+                                    <div className="skeleton movie__title--skeleton"></div>
+                                    <div className="skeleton movie__sub-title--skeleton"></div>
+                                  </div>
+                                </>
+                              )   
+                              :
+                              (
+                                <Movie movie={movie} id={index} className={"movie"} />
+                              )
+                            }
+                        </React.Fragment>
                         )
                      })
                   ) : 
                   (
-                    <div>
-                      {loading ? 
+                    loading ? 
                       (
-                        <div className='loading__spinner'><img src={spinner} alt="" /></div>
-                      ): (
-                        <div className='not__found--results'> No results Found</div>
+                        <div className='loading-spinner'>
+                          <img src={spinner} alt="" />
+                        </div>
+                      ) : (
+                        <div className='not__found--results'> No results Found</div>                                       
                       )
-                      }
-                      
-                    </div>
-                                       
                   )
                 }
             

@@ -30,6 +30,19 @@
   cursor: pointer;
 }
 
+.loading-spinner{ 
+    width: 100%;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.loading-spinner img{
+    width: 500px;
+}
+
 
 
 /* SMALL PHONES, TABLETS, LARGE SMARTPHONES */
