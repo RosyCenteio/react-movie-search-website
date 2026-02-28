@@ -4,13 +4,15 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Movie from '../Ui/Movie';
 import spinner from '../../assets/spinner.gif'
+import { useLocation } from "react-router-dom";
+
 
 const MoviesList = () => {
-
     let defaultTitle = "God";
-    const [searchField, setSearchField] = useState("");
+    const location = useLocation();
+    const [searchField, setSearchField] = useState(location.state?.searchField || "");
     const[loading, setLoading] = useState(true);
-    const[movies, setMovies] = useState({Search: []});
+    const [movies, setMovies] = useState({ Search: (location.state?.movies || [] )});
 
     function onKeyPress(key){
         if(key === 'Enter'){
@@ -54,7 +56,13 @@ const MoviesList = () => {
     }
 
     useEffect(() => {
-        searchMovies(defaultTitle, "");
+      if(!movies || movies.Search === undefined){
+          searchMovies(defaultTitle, "");
+      }
+      else{
+        searchMovies(searchField, "");
+      }
+        
     },[])
 
 
@@ -67,7 +75,6 @@ const MoviesList = () => {
         }
         console.log(movies.Search);
     }
-
 
 
   return (
@@ -111,10 +118,10 @@ const MoviesList = () => {
                               )   
                               :
                               (
-                                <Movie movie={movie} id={index} className={"movie"} />
+                                <Movie movie={movie} movies= {movies.Search} searchField={searchField} className={"movie"} />
                               )
                             }
-                        </React.Fragment>
+                        </React.Fragment >
                         )
                      })
                   ) : 

@@ -3,16 +3,18 @@ import Movie from '../../components/Ui/Movie'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import './Player.css'
-import { Link } from 'react-router-dom'
 import Nav from '../../components/Nav/Nav'
 import Footer from '../../components/Footer/Footer'
 import spinner from '../../assets/spinner.gif'
+import { useLocation, useNavigate } from "react-router-dom";
 
 
 const Player = () => {
   const { id } = useParams(); 
   const [loading, setLoading] = useState(true);
   const [movie, setMovie] = useState({});
+  const { state } = useLocation();
+  const navigate = useNavigate();
 
   async function fetchMovies(){
       setLoading(true);
@@ -38,10 +40,8 @@ const Player = () => {
           )   
           :
           (
-            <>
-              <Link to="/">
-                 <button className='btn__back'>← Back</button>
-              </Link> 
+            <>  
+              <button className='btn__back' onClick={() => navigate("/", { state })}>← Back</button>
               <div className='movie_info'>
                 <Movie movie={movie} className={"movie__detail"}/>
                 <div className='movie__info--description'>
